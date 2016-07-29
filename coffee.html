@@ -43,22 +43,40 @@
     </div>
 </div>
 
+<script src="http://code.jquery.com/jquery.js"></script>
 <script>
+    
+    var drinksOrdered = [];
 
-    var myImage = document.getElementById("coffee_image");
-    var myRevenueMessage = document.getElementById("revenue");
+    $("#coffee_image").attr("src", "static/coffee_beans.jpg");
 
-    myImage.setAttribute('src', "static/coffee_beans.jpg");
+    function makeCoffee(drinkType) {
 
-    myImage.addEventListener('click', function () {
-        return makeCoffee();
+        drinksOrdered.push(drinkType);
+        console.log(drinksOrdered);
+
+        $("#coffee_image").attr("src", "static/coffee_machine.jpg");
+        setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_mug.jpg"); }, 500);
+        setTimeout(function() { $("#coffee_image").attr("src", "static/coffee_beans.jpg"); }, 1500);
+    }
+
+    $("#coffee_image").on('click', function () {
+        makeCoffee('brew');
     });
 
-    function makeCoffee() {
-         myImage.src = "static/coffee_machine.jpg";
-         setTimeout(function() { myImage.setAttribute('src', "static/coffee_mug.jpg"); }, 500);
-         setTimeout(function() { myImage.setAttribute('src', "static/coffee_beans.jpg"); }, 1500);
-    }
+    $("#latte").on('click', function () {
+        makeCoffee('latte');
+    });
+
+    // Schedule an event listener on the element with the id espresso. When the user clicks the selected element, the anonymous function is called. The annoymous function calls makeCoffee, passing the argument "espresso."
+    $("#espresso").on('click', function () {
+        makeCoffee('espresso');
+    });
+
+    $('#hot-chocolate').on('click', function () {
+        makeCoffee('hotChocolate');
+    });
+
 
 </script>
 
